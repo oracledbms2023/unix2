@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupyter Notebook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="flex">
+        <button id="copyButton1">copy 1</button> <span id="copyResult1"></span>
+        <button id="copyButton2">copy 2</button> <span id="copyResult2"></span>
+        <button id="copyButton3">copy 3</button> <span id="copyResult3"></span>
+        <button id="copyButton4">copy 4</button> <span id="copyResult4"></span>
+        <button id="copyButton5">copy 5</button> <span id="copyResult5"></span>
+        <button id="copyButton6">copy 6</button> <span id="copyResult6"></span>
+        <button id="copyButton7">copy 7</button> <span id="copyResult7"></span>
+        <button id="copyButton9">copy 9</button> <span id="copyResult9"></span>
+        <button id="copyButton10">copy 10</button> <span id="copyResult10"></span>
+        <button id="copyButton11">copy 11</button> <span id="copyResult11"></span>
+    </div>
+
+    <h4>lab 1</h4>
+    <pre id="textToCopy1">
+#!/bin/sh
+for i in $*
+do
+if [ -d $i ]
+then
+echo "large file size is"
+echo `ls -Rl $1 | grep "^-" | tr -s ' ' | cut -d ' ' -f 5,9 | sort -n |tail -1`
+else
+echo "not a directory"
+fi
+done
+
+echo "enter the path name"
+read p
+i=1
+j=1
+len=`echo $p | wc -c`
+while [ $i -le $len ]
+do
+x=`echo $p | cut -d ' ' -f $j`
+namelength=`echo $x | wc -c`
+mkdir -p $x
+cd $x
+pwd
+x=`expr $j + 1`
+i=`expr $i + $namelength`
+done
+</pre>
+
+    <h4>lab 2</h4>
+    <pre id="textToCopy2">
+
+echo "Enter the file name 1 : $1"
+echo "Enter the file name 2 : $2"
+if [ $# -eq 0 ]
+then
+echo "no arguments passed"
+elif [ ! -e $1 -o ! -e $2 ]
+then
+echo  "file does not exist"
+else
+x=`ls -1 $1 | cut -c 1-10`
+y=`ls -1 $2 | cut -c 1-10`
+if [ $x = $y ]
+then
+echo "permission are same : $x"
+else
+echo "permissions are different"
+echo "permissions of $1 is $x"
+echo "permissions of $2 is $y"
+fi
+fi
+
+echo "Enter Arguments : $1"
+if [ $# -eq  0 ]
+then
+echo "No command line arguments is passed"
+exit
+fi
+while [ $1 ]
+do
+cat /etc/passwd | cut -d ":" -f 1 | grep "^$1" > temp
+a=`cat tmp`
+if [ "$a" != "$1" ]
+then
+echo "ERROR:$1 is an invalid argument"
+else
+echo "Home Directory for  $1 is"
+echo `cat/etc/passwd | grep "^$1" | cut -d ":" -f 6`
+fi
+shift
+done
+
+</pre>
+
+    <h4>lab 3</h4>
+    <pre id="textToCopy3">
+#!/bin/sh
+echo "enter the file name"
+read file
+if [ -f $file ]
+then
+set -- `ls -l $file`
+echo "file permission $1"
+echo "number of links $2"
+echo "user name $3"
+echo "group name $4"
+echo "file size $5 bytes"
+echo "date of modification $6 $7"
+echo "time of modification $8"
+echo "name of file $9"
+ls -l $file
+else
+echo "file does not exist"
+fi
+
+#!/bin/sh
+stty -echo
+clear
+echo "Enter the password"
+read pass1
+echo "Re-Enter the password"
+read pass2
+val=1
+while [ $val -eq 1]
+do
+if [ $pass1 = $pass2 ]
+then
+val=0
+echo "Terminal locked"
+echo "To unlock enter the password"
+pass1=""
+until ["$pass1"="$pass2"]
+do
+read pass1
+echo "Terminal locked"
+done
+echo "Terminal unlocked"
+stty echo
+else
+echo "password mismatch"
+stty -echo
+read pass2
+fi
+done
+</pre>
+
+    <h4>lab 4</h4>
+    <pre id="textToCopy4">
+#!/bin/sh
+echo "Enter the file name"
+read file
+if [ -z $file ]
+then
+echo " no arguments passed "
+elif [ ! -f $file ]
+then
+echo "file does not exist"
+else
+tr '[a-z]' '[A-Z]'<$file
+fi
+
+#!/bin/sh
+file=$1
+set -- `ls -l $file`
+lcnt=$2
+if [ $lcnt -eq 1 ]
+then
+echo "no other links"
+exit
+else
+set -- `ls -i $file`
+inode=$1
+find "." -xdev -inum $inode -print
+fi
+</pre>
+
+
+    <h4>lab 5</h4>
+    <pre id="textToCopy5">
+#!/bin/sh
+echo "enter the file name"
+read file
+if [ -z $file ]
+then
+echo "no arguments passed "
+elif [ ! -f $file ]
+then
+echo "file does not exist "
+else
+f=`ls -l $file | cut -d " " -f 8`
+echo "file creation time: "$f
+fi
+
+#!/bin/sh
+set `date`
+y=$3
+if [ $y -le 9 ]
+then
+date | sed "s/$3/*/"
+else
+date | sed "s/$3/**/"
+fi
+    
+</pre>
+
+
+    // new section
+
+    <h4>lab 6</h4>
+    <pre id="textToCopy6">
+    #!/bin/sh
+    echo "Enter the file name"
+    read file
+    if [ -z $file ]
+    then
+    echo "no arguments are passed"
+    elif [ ! -f $file ]
+    then
+    echo "File does not exist"
+    else
+    cat $file
+    cp -f $file /home/jashwanth/R1
+    fi
+    
+    #!/bin/bash
+    if [ $# -eq 0 ]
+    then
+    echo "no argument"
+    else
+    c=`ls $1`
+    echo "filename are\n$c"
+    for i in $c
+    do
+    len=`expr length $i`
+    if [ $len -ge 10 ]
+    then
+    echo "$i having $len"
+    fi
+    done
+    fi
+       
+</pre>
+
+    <h4>lab 7</h4>
+    <pre id="textToCopy7">
+    #!/bin/sh
+    t=`date +%H`
+    if [ $t -gt 0 -a $t -le 12 ]
+    then
+    echo "Good Morning"
+    elif [ $t -gt 12 -a $t -le 18 ]
+    then
+    echo "Good Afternoon"
+    elif [ $t -gt 14 -a $t -le 18 ]
+    then
+    echo "Good Evening"
+    else
+    echo "Good Night"
+    fi
+    
+    #!/bin/sh
+    if [ $# -ne 2 ]
+    then
+    echo "Error :invalid no of arguments "
+    exit
+    fi
+    str=`cat $1 | tr '\n' ' '`
+    for a in $str
+    do
+    echo "word=$a , count=`grep -c "$a" $2` "
+    done
+
+</pre>
+
+    <h4>lab 9</h4>
+    <pre id="textToCopy9">
+    #!/bin/sh
+    echo "Enter the file name: "
+    read file
+    echo "Enter the starting line: "
+    read a
+    echo "Enter the ending line: "
+    read b
+    if [ -z $file ] || [ -z $a ] || [ -z $b ]
+    then
+    echo "no arguments"
+    elif [ ! -f $file ]
+    then
+    echo "File does not exist"
+    elif [ $a -eq 0 ] || [ $b -eq 0 ] || [ $a -gt $b ]
+    then
+    echo "Invalid Input"
+    else
+    sed -n "$a,$b p" $file
+    fi
+    
+    echo "Enter the filename: \c" 
+    read fn
+    for ln in `cat $fn`
+    do 
+    lgth=`echo $ln | wc -c` 
+    lgth=`expr $lgth - 1`
+    s=1
+    e=40 
+    if [ $lgth -gt 40 ] 
+    then
+    while [ $lgth -gt 40 ] 
+    do
+    echo "`echo $ln | cut -c $s-$e` \\" 
+    lgth=`expr $lgth - 40`
+    done 
+    else 
+    echo $ln 
+    fi
+    done
+</pre>
+
+    <h4>lab 10</h4>
+    <pre id="textToCopy10">
+    awk '{ split ($0, arr, "-")
+    if ((arr[2] < 1) || (arr[2] > 12) || (arr[1] < 1) || (arr[1] > 31))
+    {
+    print "invalid date"}
+    else
+    {
+    if (arr[2] == 1)
+    print "jan"
+    if (arr[2] == 2)
+    print "feb"
+    if (arr[2] == 3)
+    print "march"
+    if (arr[2] == 4)
+    print "apirl"
+    if (arr[2] == 5)
+    print "may"
+    if (arr[2] == 6)
+    print "jun"
+    if (arr[2] == 7)
+    print "july"
+    if (arr[2] == 8)
+    print "aug"
+    if (arr[2] == 9)
+    print "sept"
+    if (arr[2] == 10)
+    print "oct"
+    if (arr[2] == 11)
+    print "nov"
+    if (arr[2] == 12)
+    print "dec"
+    print arr[1]
+    print arr[3]
+    exit 0 } }'
+    
+    #!/bin/sh
+    echo "Enter file name"
+    read file
+    if [ -z $file ]
+    then
+    echo “no arguments”
+    elif [ ! -f $file ]
+    then
+    echo “files does not exist”
+    else
+    awk '!visited[$0]++' $file
+    fi
+</pre>
+
+
+    <h4>lab 11</h4>
+    <pre id="textToCopy11">
+    BEGIN {print "TOTAL NUMBER OF BOOOKS SOLD IN EACH CATAGORY"} 
+    { books [ $1 ] +=$2 } 
+    END { for(item in books)
+    { printf("\t%-17s %1s %-5d\n", item, "=",books[item])
+    total+=books[item]
+    }
+    printf("%-17s %1s %-5s\n", "total books sold","=", total)
+    }
+    
+    
+    BEGIN { FS=":"
+    print "\n\t\tsalary statement of employees for the month of feb"
+    print "sl.no","\t","name","\t\t","designation","\t","BASIC",
+    "\t","DA","\t","HRA","\t","GROSS"
+    print}
+    { slno++; basic_tot+=$5;
+     if($5>=10000)
+    {da=0.45*$5;da_tot+=da;
+    hra=0.15*$5;hra_tot+=hra;}
+    else { da=0.50*$5;da_tot+=da;
+    hra=0.20*$5;hra_tot+=hra;}
+    sal_tot+=$5 + da +hra
+    printf "%2d\t%-15s %-12s %8d %8.2f %8.2f %8.2f\n",slno,$2,$3,$5,da,hra,$5+da+hra}
+    END {print"\n\t basic salary paid is rs" basic_tot
+    print"\n\t total da paid in rs" da_tot
+    print"\n\t total hra paid is" hra_tot
+    print"\n\t total salary paid" sal_tot 
+    }
+    
+</pre>
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
