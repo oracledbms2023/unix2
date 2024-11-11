@@ -128,27 +128,30 @@ read pass1
 echo "Re-Enter the password"
 read pass2
 val=1
-while [ $val -eq 1]
+while [ $val -eq 1 ]
 do
-if [ $pass1 = $pass2 ]
-then
-val=0
-echo "Terminal locked"
-echo "To unlock enter the password"
-pass1=""
-until ["$pass1"="$pass2"]
-do
-read pass1
-echo "Terminal locked"
+    if [ "$pass1" = "$pass2" ]
+    then
+        val=0
+        echo "Terminal locked"
+        echo "To unlock, enter the password"
+        pass1=""
+        until [ "$pass1" = "$pass2" ]
+        do
+            read pass1
+            echo "Terminal locked"
+        done
+        echo "Terminal unlocked"
+        stty echo
+    else
+        echo "Password mismatch"
+        stty -echo
+        echo "Re-Enter the password"
+        read pass2
+    fi
 done
-echo "Terminal unlocked"
-stty echo
-else
-echo "password mismatch"
-stty -echo
-read pass2
-fi
-done
+
+
 </pre>
 
     <h4>lab 4</h4>
