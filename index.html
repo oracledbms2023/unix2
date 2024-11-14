@@ -11,7 +11,7 @@
 <body>
     <div class="flex">
         <button id="copyButton1">copy 1</button> <span id="copyResult1"></span>
-        <button id="copyButton2">copy 2</button> <span id="copyResult2"></span>
+<!--         <button id="copyButton2">copy 2</button> <span id="copyResult2"></span>
         <button id="copyButton3">copy 3</button> <span id="copyResult3"></span>
         <button id="copyButton4">copy 4</button> <span id="copyResult4"></span>
         <button id="copyButton5">copy 5</button> <span id="copyResult5"></span>
@@ -20,41 +20,37 @@
         <button id="copyButton8">copy 8</button> <span id="copyResult8"></span>
         <button id="copyButton9">copy 9</button> <span id="copyResult9"></span>
         <button id="copyButton10">copy 10</button> <span id="copyResult10"></span>
-        <button id="copyButton11">copy 11</button> <span id="copyResult11"></span>
+        <button id="copyButton11">copy 11</button> <span id="copyResult11"></span> -->
     </div>
 
     <h4>lab 1</h4>
     <pre id="textToCopy1">
-#!/bin/sh
-for i in $*
-do
-if [ -d $i ]
-then
-echo "large file size is"
-echo `ls -Rl $1 | grep "^-" | tr -s ' ' | cut -d ' ' -f 5,9 | sort -n |tail -1`
-else
-echo "not a directory"
-fi
-done
+$ code .   # Have to create index.html
+$ git init
+$ git status
+$ git add a.html
+$ git status
+$ git commit -m "added first html file"
+$ git status
+$ touch b.html
+$ touch c.html
+$ touch d.html
+$ git status
+$ git add -A
+$ git commit -m "saved other html files"
+$ git status
+$ git checkout a.html
+$ git log
+$ ls
+$ Copy the path from repo
+$ git remote
+$ git remote -v
+$ git push origin master
+$ ls
 
-echo "enter the path name"
-read p
-i=1
-j=1
-len=`echo $p | wc -c`
-while [ $i -le $len ]
-do
-x=`echo $p | cut -d ' ' -f $j`
-namelength=`echo $x | wc -c`
-mkdir -p $x
-cd $x
-pwd
-x=`expr $j + 1`
-i=`expr $i + $namelength`
-done
 </pre>
 
-    <h4>lab 2</h4>
+<!--     <h4>lab 2</h4>
     <pre id="textToCopy2">
 
 echo "Enter the file name 1 : $1"
@@ -414,7 +410,7 @@ fi
     }
     
 </pre>
-
+ -->
 
 
 
